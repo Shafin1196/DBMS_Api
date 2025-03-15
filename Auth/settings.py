@@ -80,9 +80,17 @@ CORS_ALLOW_CREDENTIALS = True
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default="sqlite:///" + os.path.join(BASE_DIR, "db.sqlite3")
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'shafin1196$default',  # Replace with your MySQL database name
+        'USER': 'shafin1196',  # Replace with your MySQL username
+        'PASSWORD': '10772112r',  # Replace with your MySQL password
+        'HOST': 'shafin1196.mysql.pythonanywhere-services.com',  # Change if using a remote server
+        'PORT': '3306',  # Default MySQL port
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    }
 }
 
 

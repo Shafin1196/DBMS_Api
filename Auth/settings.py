@@ -82,7 +82,7 @@ CORS_ALLOW_CREDENTIALS = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'shafin1196$default',  # Replace with your MySQL database name
+        'NAME': 'shafin1196$dbms',  # Replace with your MySQL database name
         'USER': 'shafin1196',  # Replace with your MySQL username
         'PASSWORD': '10772112r',  # Replace with your MySQL password
         'HOST': 'shafin1196.mysql.pythonanywhere-services.com',  # Change if using a remote server

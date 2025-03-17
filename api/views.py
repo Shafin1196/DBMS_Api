@@ -19,7 +19,7 @@ def custom_login(request):
     if user.password != password:
         return Response({"error": "Invalid password"}, status=400)
 
-    return Response({"message": "Login successful!", "user": {"name": user.name, "email": user.email, "status": user.status}})
+    return Response({"message": "Login successful!", "user": {"id":user.id,"name": user.name, "email": user.email, "status": user.status}})
 
 class DepartmentViewSet(viewsets.ModelViewSet):
     queryset = Department.objects.all()

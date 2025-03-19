@@ -18,8 +18,13 @@ def custom_login(request):
     # Match plain text password (NOT RECOMMENDED for production)
     if user.password != password:
         return Response({"error": "Invalid password"}, status=400)
+    id=0;
+    if user.status=='Teacher':
+        id=Teacher.objects.get(user=user).id
+    elif user.status=='Student':
+        id=Student.objects.get(user=user).id
 
-    return Response({"message": "Login successful!", "user": {"id":user.id,"name": user.name, "email": user.email, "status": user.status}})
+    return Response({"message": "Login successful!", "user": {"id":id,"name": user.name, "email": user.email, "status": user.status}})
 
 class DepartmentViewSet(viewsets.ModelViewSet):
     queryset = Department.objects.all()

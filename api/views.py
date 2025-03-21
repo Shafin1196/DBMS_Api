@@ -26,7 +26,7 @@ def custom_login(request):
         id=Student.objects.get(user=user).id
         section=Student.objects.get(user=user).Section
 
-    return Response({"message": "Login successful!", "user": {"id":id,"name": user.name, "email": user.email, "status": user.status,"section":section.section_name}}, status=200)
+    return Response({"message": "Login successful!", "user": {"id":id,"name": user.name, "email": user.email, "status": user.status,"section":section}}, status=200)
 
 class DepartmentViewSet(viewsets.ModelViewSet):
     queryset = Department.objects.all()

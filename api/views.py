@@ -24,7 +24,7 @@ def custom_login(request):
         section=None
     elif user.status=='Student':
         id=Student.objects.get(user=user).id
-        section=Student.objects.get(user=user).Section
+        section=Student.objects.get(user=user).Section.id
 
     return Response({"message": "Login successful!", "user": {"id":id,"name": user.name, "email": user.email, "status": user.status,"section":section}}, status=200)
 

@@ -1,7 +1,7 @@
 from django.urls import path,include
 from rest_framework import routers
 from .views import custom_login, DepartmentViewSet, PersonViewSet, StudentViewSet, TeacherViewSet, CourseViewSet, SectionViewSet, QuizViewSet, \
-QuestionViewSet, AnswerViewSet,AllQuizView,ResultView
+QuestionViewSet, AnswerViewSet,AllQuizView,ResultView,CreateQuizView
 
 routers = routers.DefaultRouter()
 routers.register(r'department', DepartmentViewSet)
@@ -21,4 +21,6 @@ urlpatterns = [
     path('all/', include(routers.urls)),
     path('all-quiz',AllQuizView.as_view(),name='all_quiz'),
     path('student-answer/',ResultView.as_view(),name='student_answer')
+    path('create-quiz/',CreateQuizView.as_view(),name='create_quiz'),
+
 ]

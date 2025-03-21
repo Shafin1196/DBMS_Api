@@ -21,7 +21,7 @@ def custom_login(request):
     id=0;
     if user.status=='Teacher':
         id=Teacher.objects.get(user=user).id
-        section=Teacher.objects.get(user=user).section.all()
+        section=None
     elif user.status=='Student':
         id=Student.objects.get(user=user).id
         section=Student.objects.get(user=user).Section

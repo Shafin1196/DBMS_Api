@@ -20,7 +20,7 @@ urlpatterns = [
     path('login/', custom_login, name='custom_login'),
     path('all/', include(routers.urls)),
     path('all-quiz',AllQuizView.as_view(),name='all_quiz'),
-    path('student-answer/',ResultView.as_view(),name='student_answer')
+    path('student-answer/',ResultView.as_view(),name='student_answer'),
     path('create-quiz/',CreateQuizView.as_view(),name='create_quiz'),
 
 ]

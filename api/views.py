@@ -80,18 +80,14 @@ class AllQuizView(APIView):
         return Response(serializer.data)
 
 class CreateQuizView(APIView):
-    def post(self,request):
-        data=request.data
-        quiz_data=data.get('quiz')
-        if not quiz_data:
-            return Response({"error": "Quiz data is required"}, status=400) 
-        
-        quiz_serializer=AddQuizSerializer(data=quiz_data)
-        if quiz_serializer.is_valid():
-            quiz=quiz_serializer.save()
-            return Response(quiz_serializer.data,status=status.HTTP_201_CREATED)
-        return Response(quiz_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request):
+        quiz_data = request.data  # Directly access request data without "quiz" key
 
+        quiz_serializer = AddQuizSerializer(data=quiz_data)
+        if quiz_serializer.is_valid():
+            quiz = quiz_serializer.save()
+            return Response(quiz_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(quiz_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class ResultView(APIView):
     def get(self,request):
         query_dict={}

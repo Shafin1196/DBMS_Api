@@ -85,7 +85,7 @@ class CreateQuestionView(APIView):
         question_serializer=AddQuestionSerializer(data=question_data)
         if question_serializer.is_valid():
             question_serializer.save()
-            return Response(question_serializer.data,status=status.HTTP_201_created)
+            return Response(question_serializer.data,status=status.HTTP_201_CREATED)
         return Response(question_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             
 class CreateQuizView(APIView):

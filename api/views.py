@@ -5,7 +5,7 @@ from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.views import APIView
 from .models import Person,Department,Student,Teacher,Section,Course,Quiz,Question,Answer,StudentAnswer
-from .serializers import AddQuestionSerializer, AddQuizSerializer, DepartmentSerializer,PersonSerializer,StudentSerializer,TeacherSerializer,CourseSerializer,SectionSerializer,QuizSerializer,QuestionSerializer,AnswerSerializer,StudentAnswerSerializer
+from .serializers import AddAnswerSerializer, AddQuestionSerializer, AddQuizSerializer, DepartmentSerializer,PersonSerializer,StudentSerializer,TeacherSerializer,CourseSerializer,SectionSerializer,QuizSerializer,QuestionSerializer,AnswerSerializer,StudentAnswerSerializer
 
 @api_view(['POST'])
 def custom_login(request):
@@ -97,6 +97,19 @@ class CreateQuizView(APIView):
             quiz = quiz_serializer.save()
             return Response(quiz_serializer.data, status=status.HTTP_201_CREATED)
         return Response(quiz_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CreateAnswerView(APIView):
+    def post(self,request):
+        answer_data=request.data
+        
+        answer_serializer=AddAnswerSerializer(data=answer_data)
+        if answer_serializer.is_valid():
+            answer_serializer.save()
+            return Response(answer_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(answer_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            
+
 class ResultView(APIView):
     def get(self,request):
         query_dict={}

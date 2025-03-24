@@ -50,6 +50,7 @@ class QuestionSerializer(serializers.ModelSerializer):
         extra_fields=['quiz_question_answers']
 
 class AddQuestionSerializer(serializers.ModelSerializer):
+    quiz=serializers.PrimaryKeyRelatedField(queryset=Quiz.objects.all())
     class Meta:
         model=Question
         fields='__all__'

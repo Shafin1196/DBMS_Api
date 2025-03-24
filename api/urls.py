@@ -23,5 +23,5 @@ urlpatterns = [
     path('student-answer/',ResultView.as_view(),name='student_answer'),
     path('create-quiz/',CreateQuizView.as_view(),name='create_quiz'),
     path('create-question/',CreateQuestionView.as_view(),name="create_question"),
-    path('create-answer/',CreateAnswerView.as_view,name="create_answer"),
+    path('create-answer/',CreateAnswerView.as_view(),name="create_answer"),
 ]

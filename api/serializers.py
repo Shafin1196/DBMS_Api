@@ -76,7 +76,7 @@ class AddQuizSerializer(serializers.ModelSerializer):
 class AddAnswerSerializer(serializers.ModelSerializer):
     question=serializers.PrimaryKeyRelatedField(queryset=Question.objects.all())
     class Meta:
-        model=Question
+        model=Answer
         fields='__all__'
         
 class AnswerSerializer(serializers.ModelSerializer):

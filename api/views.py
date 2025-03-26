@@ -144,3 +144,13 @@ class NextQuestionId(APIView):
             {'question_id':question_id},
             status=status.HTTP_200_OK
         )
+
+class NextAnswerId(APIView):
+    def get(self,request):
+        answer_id=Answer.objects.aggregate(max_id=Max('answer_id'))['max_id']
+        answer_id=(answer_id+1)if answer_id else 1
+        
+        return Response(
+            {"answer_id":answer_id},
+            status=status.HTTP_200_OK
+        )

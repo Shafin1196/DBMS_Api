@@ -1,6 +1,6 @@
 from django.urls import path,include
 from rest_framework import routers
-from .views import CreateAnswerView, custom_login, DepartmentViewSet, PersonViewSet, StudentViewSet, TeacherViewSet, CourseViewSet, SectionViewSet, QuizViewSet, \
+from .views import NextQuestionId,NextQuizId,CreateAnswerView, custom_login, DepartmentViewSet, PersonViewSet, StudentViewSet, TeacherViewSet, CourseViewSet, SectionViewSet, QuizViewSet, \
 QuestionViewSet, AnswerViewSet,AllQuizView,ResultView,CreateQuizView,CreateQuestionView
 
 routers = routers.DefaultRouter()
@@ -24,4 +24,6 @@ urlpatterns = [
     path('create-quiz/',CreateQuizView.as_view(),name='create_quiz'),
     path('create-question/',CreateQuestionView.as_view(),name="create_question"),
     path('create-answer/',CreateAnswerView.as_view(),name="create_answer"),
+    path('next-quiz-id/',NextQuizId.as_view(),name="next-quiz-id"),
+    path('next-question-id/',NextQuestionId.as_view(),name="next-question-id"),
 ]

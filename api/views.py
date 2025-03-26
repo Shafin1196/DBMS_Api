@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.views import APIView
 from .models import Person,Department,Student,Teacher,Section,Course,Quiz,Question,Answer,StudentAnswer
+from django.db.models import Max
 from .serializers import AddAnswerSerializer, AddQuestionSerializer, AddQuizSerializer, DepartmentSerializer,PersonSerializer,StudentSerializer,TeacherSerializer,CourseSerializer,SectionSerializer,QuizSerializer,QuestionSerializer,AnswerSerializer,StudentAnswerSerializer
 
 @api_view(['POST'])
@@ -122,3 +123,24 @@ class ResultView(APIView):
 
         serializer=StudentAnswerSerializer(student_answer,many=True)
         return Response(serializer.data)
+
+class NextQuizId(APIView):
+    def get(self,request):
+        quiz_id=Quiz.objects.aggregate(max_id=Max('quiz_id'))['max_id']
+        quiz_id=(quiz_id+1) if quiz_id else 1
+        return Response(
+            {
+                "quiz_id":quiz_id,
+            },
+            status=status.HTTP_200_OK
+        )
+
+class NextQuestionId(APIView):
+    def get(self,request):
+        question_id=Question.objects.aggregate(max_id=Max('question_id'))['max_id']
+        question_id=(question_id+1)if question_id else 1
+        
+        return Response(
+            {'question_id':question_id},
+            status=status.HTTP_200_OK
+        )

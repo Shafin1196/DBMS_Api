@@ -173,7 +173,7 @@ class GetResult(APIView):
                 {"error": "Both 'student' and 'quiz' query parameters are required."},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        results = Result.objects.filter(Student_id=student_id, quiz_id=quiz_id).order_by('submitedAt').first()
+        results = Result.objects.filter(Student_id=student_id, quiz_id=quiz_id).order_by('-submitedAt').first()
         if not results:
             return Response(
                 {"error": "No results found for the given student and quiz."},

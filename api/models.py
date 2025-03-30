@@ -81,3 +81,12 @@ class StudentAnswer(models.Model):
     correct_answer=models.ForeignKey(Answer,on_delete=models.CASCADE,related_name='correct_answer',null=True,blank=True)
     def __str__(self):
         return f' {self.student_answer.answer}'
+
+class Result(models.Model):
+    quiz=models.ForeignKey(Quiz,on_delete=models.CASCADE,related_name="quiz_result")
+    Student=models.ForeignKey(Student,on_delete=models.CASCADE,related_name="student_result")
+    submitedAt=models.DateTimeField(auto_now_add=True)
+    numberOfQuestions=models.IntegerField
+    numberOfCorrectAnswers=models.IntegerField
+    achievedMarks=models.DecimalField(decimal_places=2)
+    

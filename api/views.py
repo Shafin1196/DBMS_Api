@@ -4,9 +4,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.views import APIView
-from .models import Person,Department,Student,Teacher,Section,Course,Quiz,Question,Answer,StudentAnswer
+from .models import Person,Department, Result,Student,Teacher,Section,Course,Quiz,Question,Answer,StudentAnswer
 from django.db.models import Max
-from .serializers import AddAnswerSerializer, AddQuestionSerializer, AddQuizSerializer, DepartmentSerializer,PersonSerializer,StudentSerializer,TeacherSerializer,CourseSerializer,SectionSerializer,QuizSerializer,QuestionSerializer,AnswerSerializer,StudentAnswerSerializer
+from .serializers import AddAnswerSerializer, AddQuestionSerializer, AddQuizSerializer, DepartmentSerializer,PersonSerializer, ResultSerializer,StudentSerializer,TeacherSerializer,CourseSerializer,SectionSerializer,QuizSerializer,QuestionSerializer,AnswerSerializer,StudentAnswerSerializer
 
 @api_view(['POST'])
 def custom_login(request):
@@ -154,3 +154,26 @@ class NextAnswerId(APIView):
             {"answer_id":answer_id},
             status=status.HTTP_200_OK
         )
+
+class CreateResult(APIView):
+    def post(self,request):
+        serializer=ResultSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return  Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class GetResult(APIView):
+    def get(self,request):
+        student_id=request.query_params.get('student')
+        quiz_id=request.query_params.get('quiz')
+        
+        if not student_id or not quiz_id:
+            return Response(
+                {"error": "Both 'student' and 'quiz' query parameters are required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        results = Result.objects.filter(Student_id=student_id, quiz_id=quiz_id)
+        serializer = ResultSerializer(results, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+            

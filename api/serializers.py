@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Department,Person,Student,Teacher,Section,Course,Quiz,Question,Answer,StudentAnswer
+from .models import Department,Person, Result,Student,Teacher,Section,Course,Quiz,Question,Answer,StudentAnswer
 from .models import Person
 
 
@@ -93,5 +93,10 @@ class StudentAnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model=StudentAnswer
         fields=['quiz','correct_answer','student_answer']
+    
+class ResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Result
+        fields="__all__"
        
        

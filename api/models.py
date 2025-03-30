@@ -86,7 +86,7 @@ class Result(models.Model):
     quiz=models.ForeignKey(Quiz,on_delete=models.CASCADE,related_name="quiz_result")
     Student=models.ForeignKey(Student,on_delete=models.CASCADE,related_name="student_result")
     submitedAt=models.DateTimeField(auto_now_add=True)
-    numberOfQuestions=models.IntegerField()
-    numberOfCorrectAnswers=models.IntegerField()
+    numberOfQuestions=models.IntegerField(blank=True,null=True)
+    numberOfCorrectAnswers=models.IntegerField(blank=True,null=True)
     achievedMarks=models.DecimalField(max_digits=10,decimal_places=2,)
     

@@ -179,6 +179,6 @@ class GetResult(APIView):
                 {"error": "No results found for the given student and quiz."},
                 status=status.HTTP_404_NOT_FOUND
             )
-        serializer = ResultSerializer(results, many=True)
+        serializer = ResultSerializer(results)
         return Response(serializer.data, status=status.HTTP_200_OK)
             

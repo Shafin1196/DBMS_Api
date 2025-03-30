@@ -52,7 +52,7 @@ class Quiz(models.Model):
     section=models.ForeignKey(Section,on_delete=models.CASCADE,related_name='section')
     course=models.ForeignKey(Course,on_delete=models.CASCADE,related_name='course',null=True,blank=True)
     quiz_name=models.CharField(max_length=100)
-    quiz_marks=models.IntegerField
+    quiz_marks=models.IntegerField(blank=True,null=True)
     start_time=models.DateTimeField()
     end_time=models.DateTimeField()
     def __str__(self):
@@ -88,5 +88,5 @@ class Result(models.Model):
     submitedAt=models.DateTimeField(auto_now_add=True)
     numberOfQuestions=models.IntegerField
     numberOfCorrectAnswers=models.IntegerField
-    achievedMarks=models.DecimalField(decimal_places=2)
+    achievedMarks=models.DecimalField(max_digits=10,decimal_places=2,)
     

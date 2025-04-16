@@ -138,7 +138,7 @@ class NextQuizId(APIView):
 class NextQuestionId(APIView):
     def get(self,request):
         question_id=Question.objects.aggregate(max_id=Max('question_id'))['max_id']
-        question_id=(question_id+1)if question_id else 1
+        question_id=(question_id)if question_id else 1
         
         return Response(
             {'question_id':question_id},
@@ -148,7 +148,7 @@ class NextQuestionId(APIView):
 class NextAnswerId(APIView):
     def get(self,request):
         answer_id=Answer.objects.aggregate(max_id=Max('answer_id'))['max_id']
-        answer_id=(answer_id+1)if answer_id else 1
+        answer_id=(answer_id)if answer_id else 1
         
         return Response(
             {"answer_id":answer_id},

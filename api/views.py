@@ -12,11 +12,11 @@ from .serializers import AddAnswerSerializer, AddQuestionSerializer, AddQuizSeri
 def custom_login(request):
     email = request.data.get("email")
     password = request.data.get("password")
-    # Find user by email
+    # query to find user by email
     user = Person.objects.filter(email=email).first()
     if user is None:
         return Response({"error": "Invalid email"}, status=400)
-    # Match plain text password (NOT RECOMMENDED for production)
+    # Match plain text password 
     if user.password != password:
         return Response({"error": "Invalid password"}, status=400)
     id=0;
@@ -127,7 +127,7 @@ class ResultView(APIView):
 class NextQuizId(APIView):
     def get(self,request):
         quiz_id=Quiz.objects.aggregate(max_id=Max('quiz_id'))['max_id']
-        quiz_id=(quiz_id+1) if quiz_id else 1
+        quiz_id=(quiz_id) if quiz_id else 1
         return Response(
             {
                 "quiz_id":quiz_id,
